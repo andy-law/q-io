@@ -4,7 +4,7 @@ var Boot = require("./fs-boot");
 var Common = require("./fs-common");
 var BufferStream = require("./buffer-stream");
 var Reader = require("./reader");
-var Set = require("collections/set");
+// var Set = require("collections/set");
 
 module.exports = MockFs;
 
@@ -528,7 +528,7 @@ LinkNode.prototype.isSymbolicLink = function () {
 };
 
 LinkNode.prototype._follow = function (via, memo) {
-    memo = memo || Set();
+    memo = memo || function() {};
     if (memo.has(this)) {
         var error = new Error("Can't follow symbolic link cycle at " + JSON.stringify(via));
         error.code = "ELOOP";
@@ -549,4 +549,3 @@ LinkNode.prototype._canonicalParts = function (parts, via) {
 
 // cycle breaking
 var FS = require("./fs");
-
